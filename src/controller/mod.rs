@@ -1,0 +1,13 @@
+pub mod errors;
+pub mod categories;
+pub mod comments;
+pub mod media;
+pub mod pages;
+pub mod posts;
+pub mod revisions;
+pub mod settings;
+pub mod statuses;
+pub mod tags;
+pub mod taxonomies;
+pub mod types;
+pub mod users;
