@@ -14,8 +14,8 @@
   },
   "log": {
     "file": "logs/levante-wp-api.log",
-    "rotateType": "TIME",
-    "rotateValue": "60*60*24",
-    "rotateCount": "7"
+    "rotate_type": "TIME",
+    "rotate_value": "60*60*24",
+    "rotate_count": 7
   }
 }

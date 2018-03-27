@@ -1,14 +1,15 @@
+use rocket_contrib::Json;
 
 pub trait WpCRUD {
 
-    fn list() -> content::Json<String>;
+    fn list() -> Json<String>;
 
-    fn create() -> content::Json<String>;
+    fn create() -> Json<String>;
 
-    fn retrieve() -> content::Json<String>;
+    fn retrieve() -> Json<String>;
 
-    fn update() -> content::Json<String>;
+    fn update() -> Json<String>;
 
-    fn delete() -> content::Json<String>;
+    fn delete() -> Json<String>;
 
 }

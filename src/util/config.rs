@@ -1,7 +1,7 @@
 use std::fs::File;
-use std::io::Read;
 use std::fmt;
 use std::net::IpAddr;
+use std::error::Error;
 
 use serde_json;
 
@@ -10,13 +10,13 @@ pub struct DbConfig {
     pub host: IpAddr,
     pub port: u16,
     pub user: String,
-    pub password: Option<String>,
-    pub database: String,
+    pub password: String,
+    pub schema: String,
 }
 
 impl fmt::Display for DbConfig {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        let connect = format!("mysql://{}:{}@{}:{}/{}", self.user, self.password, self.host, self.port, self.database);
+        let connect = format!("mysql://{}:{}@{}:{}/{}", self.user, self.password, self.host, self.port, self.schema);
         write!(f, "{}", connect)
     }
 }
@@ -41,16 +41,13 @@ pub struct ServerConfig {
 pub struct Config {
     pub home: String,
     pub server: ServerConfig,
-    pub db: DbConfig,
+    pub database: DbConfig,
     pub log: LogConfig,
 }
 
 impl Config {
-    pub fn from_file(filepath: &str) -> Option<Config> {
-        let mut file = File::open(filepath)?;
-        let mut raw = String::new();
-        file.read_to_string(&mut raw)?;
-        let value = serde_json::from_str(&raw).unwrap()?;
-        Ok(value)
+    pub fn from_file(filepath: String) -> Result<Config, Box<Error>> {
+        let file = File::open(filepath)?;
+        Ok(serde_json::from_reader(file)?)
     }
 }

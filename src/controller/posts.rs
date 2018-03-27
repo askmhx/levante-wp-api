@@ -1,22 +1,30 @@
 extern crate rocket;
 
-use rocket::response::content;
+use rocket_contrib::{Json,Value};
 use orm::database::DbConn;
 
 
 #[get("/wp-json/wp/v2/posts")]
-pub fn list(conn: DbConn) -> content::Json<String> {
-
+pub fn list(conn: DbConn) -> Json<Value> {
+    Json(json!({ "status": "ok" }))
 }
 
-#[post("/wp-json/wp/v2/posts")]
-pub fn create() -> content::Json<String> {}
+#[post("/wp-json/wp/v2/posts", format = "application/json")]
+pub fn create(conn: DbConn) -> Json<Value> {
+    Json(json!({ "status": "ok" }))
+}
 
 #[get("/wp-json/wp/v2/posts/<id>")]
-pub fn retrieve(id: &str) -> content::Json<String> {}
+pub fn retrieve(conn: DbConn,id: String) -> Json<Value> {
+    Json(json!({ "status": "ok" }))
+}
 
 #[get("/wp-json/wp/v2/posts/<id>")]
-pub fn update(id: &str) -> content::Json<String> {}
+pub fn update(conn: DbConn,id: String) -> Json<Value> {
+    Json(json!({ "status": "ok" }))
+}
 
 #[get("/wp-json/wp/v2/posts/<id>")]
-pub fn delete(id: &str) -> content::Json<String> {}
+pub fn delete(conn: DbConn,id: String) -> Json<Value> {
+    Json(json!({ "status": "ok" }))
+}
